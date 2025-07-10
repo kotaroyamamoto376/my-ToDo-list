@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoリスト</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>📝 ToDoリスト</h1>
+        <div class="input-area">
+            <input type="text" id="task-input" placeholder="新しいタスクを入力...">
+            <button id="add-button">追加</button>
+        </div>
+        <ul id="task-list">
+            </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const taskInput = document.getElementById('task-input');
+            const addButton = document.getElementById('add-button');
+            const taskList = document.getElementById('task-list');
+
+            // タスクを追加する関数
+            const addTask = () => {
+                const taskText = taskInput.value.trim();
+                if (taskText === '') {
+                    alert('タスクを入力してください。');
+                    return;
+                }
+
+                // li要素の作成
+                const li = document.createElement('li');
+
+                // タスク名を表示するspan要素
+                const taskSpan = document.createElement('span');
+                taskSpan.textContent = taskText;
+
+                // 完了チェックボックス
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.addEventListener('change', () => {
+                    li.classList.toggle('completed');
+                });
+
+                // 削除ボタン
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = '削除';
+                deleteButton.className = 'delete-button';
+                deleteButton.addEventListener('click', () => {
+                    taskList.removeChild(li);
+                });
+
+                // 要素の組み立て
+                li.appendChild(checkbox);
+                li.appendChild(taskSpan);
+                li.appendChild(deleteButton); // 削除ボタンをliの子要素にする
+                taskList.appendChild(li);
+
+                // 入力欄をクリア
+                taskInput.value = '';
+            };
+
+            // 「追加」ボタンのクリックイベント
+            addButton.addEventListener('click', addTask);
+
+            // Enterキーでもタスクを追加
+            taskInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    addTask();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

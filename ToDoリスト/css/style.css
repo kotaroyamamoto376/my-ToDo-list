@@ -1,0 +1,190 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #864ec1;
+    --secondary-color: #b2ffae;
+    --background-color: #f0f2f5;
+    --container-bg: #ffffff;
+    --text-color: #333;
+    --subtle-text-color: #888;
+    --accent-color: #28a745;
+    --danger-color: #e74c3c;
+    --border-color: #dfe1e5;
+}
+/* 基本的なスタイリング */
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    /* 美しいグラデーション背景 */
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    background: var(--container-bg);
+    padding: 30px;
+    border-radius: 16px;
+    /* より自然な影 */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 480px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}   
+
+h1 {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px; /* 要素間の隙間 */
+    margin-bottom: 25px;
+}
+
+#task-input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease; /* アニメーション効果 */
+}
+
+#task-input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.2);
+}
+
+#add-button {
+    padding: 12px 20px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+
+#add-button:hover {
+    transform: translateY(-2px); /* 少し浮き上がる */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #fafafa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease; /* タスク追加時のアニメーション */
+}
+
+li:hover {
+    transform: scale(1.02);
+    border-color: var(--secondary-color);
+}
+        
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    /* チェックボックスをモダンに */
+li input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%; /* 円形に */
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+}
+    
+li input[type="checkbox"]:hover {
+    border-color: var(--accent-color);
+}
+
+li input[type="checkbox"]:checked {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+/* チェックマークの作成 */
+li input[type="checkbox"]:checked::after {
+    content: '✔';
+    color: white;
+    position: absolute;
+    font-size: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* タスクのテキスト部分 */
+li span {
+    flex-grow: 1;
+    transition: color 0.3s ease;
+}
+
+/* 完了したタスクのスタイル */
+li.completed span {
+    text-decoration: line-through;
+    color: var(--subtle-text-color);
+}
+    
+li.completed {
+    opacity: 0.7;
+}
+
+.delete-button {
+    background-color: transparent;
+    color: var(--danger-color);
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    
+.delete-button:hover {
+    background-color: #fce8e6;
+    transform: rotate(90deg); /* 回転アニメーション */
+}
